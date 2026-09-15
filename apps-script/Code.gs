@@ -13,15 +13,22 @@ function doPost(e) {
     var data = JSON.parse(e.postData.contents);
     var sheet = getOrCreateSheet_();
 
-    sheet.appendRow([
-      new Date(),
+    var row = sheet.getLastRow() + 1;
+    var values = [
       data.name || "",
       data.phone || "",
       data.service || "",
       data.date || "",
       data.comment || "",
       data.page || ""
-    ]);
+    ];
+
+    // Дата — как настоящая дата, остальные поля — строго как текст,
+    // чтобы значения вроде "+7 (925)..." не превращались в формулу/#ERROR!
+    sheet.getRange(row, 1).setValue(new Date());
+    var textRange = sheet.getRange(row, 2, 1, values.length);
+    textRange.setNumberFormat("@");
+    textRange.setValues([values]);
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))

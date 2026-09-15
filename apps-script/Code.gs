@@ -23,9 +23,12 @@ function doPost(e) {
       data.page || ""
     ];
 
-    // Дата — как настоящая дата, остальные поля — строго как текст,
-    // чтобы значения вроде "+7 (925)..." не превращались в формулу/#ERROR!
-    sheet.getRange(row, 1).setValue(new Date());
+    // Дата — как настоящая дата с явным форматом (иначе время может не
+    // отображаться), остальные поля — строго как текст, чтобы значения
+    // вроде "+7 (925)..." не превращались в формулу/#ERROR!
+    var dateCell = sheet.getRange(row, 1);
+    dateCell.setNumberFormat("dd.MM.yyyy HH:mm:ss");
+    dateCell.setValue(new Date());
     var textRange = sheet.getRange(row, 2, 1, values.length);
     textRange.setNumberFormat("@");
     textRange.setValues([values]);

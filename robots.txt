@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shugaringtyt.ru/sitemap.xml

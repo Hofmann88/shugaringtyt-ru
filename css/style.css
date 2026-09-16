@@ -311,10 +311,11 @@ ul{ list-style:none; margin:0; padding:0; }
 
 .price-panel{
   display:none;
-  grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+  flex-wrap:wrap;
+  justify-content:center;
   gap:18px;
 }
-.price-panel.active{ display:grid; animation:fadeIn .4s ease; }
+.price-panel.active{ display:flex; animation:fadeIn .4s ease; }
 @keyframes fadeIn{ from{ opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
 
 .price-card{
@@ -323,6 +324,7 @@ ul{ list-style:none; margin:0; padding:0; }
   display:flex; flex-direction:column; gap:10px;
   border:1px solid var(--line);
   transition:transform .3s ease, box-shadow .3s ease;
+  flex:1 1 260px; max-width:300px;
 }
 .price-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
 .price-card span{ font-weight:600; color:var(--ink-soft); font-size:.95rem; }
@@ -542,7 +544,7 @@ ul{ list-style:none; margin:0; padding:0; }
   .hero-stats{ gap:24px; }
   .adv-grid{ grid-template-columns:1fr; }
   .timeline{ grid-template-columns:1fr; }
-  .price-panel{ grid-template-columns:1fr; }
+  .price-card{ flex-basis:100%; max-width:100%; }
   .booking-form{ padding:24px; }
   .prep-note{ padding:26px 22px; }
   .floating-actions{ right:14px; bottom:14px; }
